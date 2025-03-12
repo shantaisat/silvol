@@ -2,7 +2,7 @@
 
 
 ## Overview
-This project is a College Noticeboard web application built with Django and styled using Bootstrap 5. It provides full CRUD functionality, enabling users to create, read, update, and delete notices efficiently. The application addresses the need for a centralised, user-friendly platform for managing college announcements, improving communication and accessibility for students and staff.
+Silvol is a platform built with Django that connects tech-savvy volunteers with elderly individuals to help them overcome tech-related challenges. The application provides full CRUD functionality, allowing volunteers to create, read, update, and delete tech support appointments. Silvol empowers volunteers to gain experience and give back to the community by assisting elderly users with popular technologies like Zoom, WhatsApp, Alexa, Google services, Skype, and more. The platform bridges the digital divide, enabling elderly users to learn how to use technology to stay connected and combat loneliness, while fostering a sense of community and support.
 
 ## UX Design Process
 - **Link to User Stories in GitHub Projects:**
@@ -11,16 +11,24 @@ This project is a College Noticeboard web application built with Django and styl
   - [Wireframe Designs](https://linktowireframes.com)
   - Wireframes were designed to ensure clarity, intuitive navigation, and compatibility with assistive technologies. High-contrast colours and alt text for images were used to maximise accessibility.
 - **Design Rationale:**
-  - The layout emphasises simplicity and readability, with Bootstrap 5 providing a responsive design. The colour scheme adheres to WCAG guidelines for contrast, and the typography uses accessible fonts for clarity.
-  - Accessibility considerations include keyboard navigation and screen reader support, ensuring usability for users with diverse needs.
+- The layout of Silvol prioritises simplicity and user-friendliness, ensuring an intuitive   experience for both volunteers and elderly users. The responsive design, built with Django and styled using Bootstrap 5, adapts seamlessly across various devices, making the platform accessible from desktops, tablets, and smartphones.
+
+- The colour scheme is carefully selected to meet WCAG guidelines for contrast, providing high visibility and clarity for all users, including those with visual impairments. The typography is designed with legibility in mind, using accessible fonts to enhance readability.
+
+- Accessibility features are integral to the platform, including keyboard navigation, clear visual cues, and support for screen readers. These considerations ensure that Silvol is usable by individuals with diverse needs, enhancing its inclusivity and overall effectiveness.
+
 - **Reasoning For Any Final Changes:**
   - Based on user feedback, adjustments were made to enhance usability, such as reordering navigation elements for better flow and refining accessibility features. These changes improve the inclusivity of the application.
 
 ## Key Features
-- **Notice Management:** Create, view, update, and delete notices with ease.
-- **User Authentication:** Secure login/logout functionality for managing user access.
-- **Inclusivity Notes:** 
-  - Features include ARIA labels and `alt` attributes on images for screen readers.
+Volunteer & Elderly User Profiles: Create, view, update, and delete profiles for both volunteers and elderly users, allowing detailed information such as skills, availability, and tech needs.
+
+-**Appointment Management**: Volunteers can create, view, update, and delete tech support appointments, helping elderly users with their tech-related challenges.
+
+-**User Authentication**: Secure login/logout functionality for both volunteers and elderly users, ensuring safe access and privacy for all platform members.
+
+-**Inclusivity Features:**
+Accessibility features include ARIA labels and 'alt' attributes on images, ensuring that the platform is usable with screen readers. Keyboard navigation is supported for easy navigation by users with disabilities.
 
 ## Deployment
 - **Platform:** Heroku
@@ -40,7 +48,7 @@ This project is a College Noticeboard web application built with Django and styl
 
 ### Use Cases and Reflections:
 
-Throughout this project, I relied on GitHub Copilot to streamline development and testing. This was my first time using AI tools so extensively, and it became an invaluable collaborator during the process.
+**Throughout this project, I relied on GitHub Copilot to streamline development and testing. This was my first time using AI tools so extensively, and it became an invaluable collaborator during the process.
 
 - **Code Creation:** 
   - Reflection: Initially, I was hesitant about how much I could rely on Copilot, but I quickly saw its value in generating boilerplate code, like Django models and CRUD views. Using reverse and multi-step prompts gave me the confidence to explore alternative approaches, and it even taught me new techniques I hadn’t considered before. For instance, it suggested cleaner, more Pythonic ways to handle database queries that saved me time and effort.
