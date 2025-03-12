@@ -22,4 +22,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('appointments/', include('appointments.urls')),
     path('', include('django.contrib.auth.urls')),  # Django's built-in login/logout views
+    path('summernote/', include('django_summernote.urls')),  # Add Summernote URL
+    
 ]
