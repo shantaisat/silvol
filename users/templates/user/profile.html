@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p><strong>Type:</strong> {{ user.userprofile.get_user_type_display }}</p>
+    <p><strong>Biography:</strong> {{ user.userprofile.biography }}</p>
+    <p><strong>Skills:</strong> {{ user.userprofile.skills }}</p>
+    <p><strong>Availability:</strong> {{ user.userprofile.availability }}</p>
+    <p><strong>Languages Spoken:</strong> {{ user.userprofile.languages_spoken }}</p>
+
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+    <a href="{% url 'delete_account' %}" class="btn btn-danger">Delete Account</a>
+</div>
+{% endblock %}
