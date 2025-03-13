@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users.views import home  # Import home view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('appointments/', include('appointments.urls')),
+    path('', home, name='home'),  # Add home view here
     path('', include('django.contrib.auth.urls')),  # Django's built-in login/logout views
     path('summernote/', include('django_summernote.urls')),  # Add Summernote URL
     
