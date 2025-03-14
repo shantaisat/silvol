@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Silvo{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <!-- Hero Section -->
+    <div class="jumbotron py-5 bg-light rounded">
+        <h1 class="display-4">Welcome to Silvo</h1>
+        <p class="lead">Connecting tech-savvy volunteers with elderly individuals who need tech support.</p>
+        
+        {% if user.is_authenticated %}
+            <h3 class="mt-4">Hello, {{ user.email }}!</h3>
+            <p>Explore available appointments or manage your profile.</p>
+            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+            <a href="{% url 'appointment_list' %}" class="btn btn-success btn-lg">View Appointments</a>
+        {% else %}
+            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+            <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
+        {% endif %}
+    </div>
+
+    <!-- About Silvo -->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h2>How Silvo Works</h2>
+            <p>Silvo helps elderly individuals get the tech support they need by connecting them with volunteers. Volunteers assist with apps like Zoom, WhatsApp, Alexa, Google services, and more.</p>
+        </div>
+        <div class="col-md-6">
+            <h2>Get Started</h2>
+            <p>Sign up as a volunteer or request help from a tech-savvy individual who can guide you step by step.</p>
+        </div>
+    </div>
+
+    <!-- Available Tech Support Section -->
+    <div class="mt-5">
+        <h2>We Can Help With:</h2>
+        <div class="row">
+            <div class="col-md-3"><p>📱 WhatsApp</p></div>
+            <div class="col-md-3"><p>🎥 Zoom</p></div>
+            <div class="col-md-3"><p>🔊 Alexa</p></div>
+            <div class="col-md-3"><p>🌍 Google Services</p></div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-5">
+        <h2>Ready to Get Started?</h2>
+        {% if not user.is_authenticated %}
+            <a href="{% url 'account_signup' %}" class="btn btn-success">Join Silvo Today</a>
+        {% else %}
+            <a href="{% url 'profile' %}" class="btn btn-primary">Go to Your Profile</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

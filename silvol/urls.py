@@ -16,14 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users.views import home  # Import home view
+from users.views import home, profile_view, edit_profile, delete_account  # Import the views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
-    path('appointments/', include('appointments.urls')),
     path('', home, name='home'),  # Add home view here
+    path('admin/', admin.site.urls),
+    path('profile/', profile_view, name='profile'),  # Profile view
+    path('edit_profile/', edit_profile, name='edit_profile'),  # Edit profile view
+    path('delete_account/', delete_account, name='delete_account'),  # Delete account view
+    path('users/', include('users.urls')),  # Users app URLs
+    path('appointments/', include('appointments.urls')),  # Appointments app URLs
+    path('accounts/', include('allauth.urls')),  # Allauth handles authentication
+    path('summernote/', include('django_summernote.urls')),  # Summernote URL
     path('', include('django.contrib.auth.urls')),  # Django's built-in login/logout views
-    path('summernote/', include('django_summernote.urls')),  # Add Summernote URL
-    
 ]

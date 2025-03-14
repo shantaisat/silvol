@@ -1,43 +1,47 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 from .models import Appointment
 from .forms import AppointmentForm
 
-@login_required
-def appointment_list(request):
-    appointments = Appointment.objects.filter(status='pending')
-    return render(request, 'appointments/appointment_list.html', {'appointments': appointments})
+# List all appointments (CBV)
+class AppointmentListView(ListView):
+    model = Appointment
+    template_name = "appointments/appointment_list.html"  # Template for appointment list
+    context_object_name = "appointments"  # The context name for the list of appointments
 
-@login_required
-def appointment_detail(request, pk):
-    appointment = get_object_or_404(Appointment, pk=pk)
-    return render(request, 'appointments/appointment_detail.html', {'appointment': appointment})
+# View details of a specific appointment (CBV)
+class AppointmentDetailView(DetailView):
+    model = Appointment
+    template_name = "appointments/appointment_detail.html"  # Template for individual appointment details
 
+# Create an appointment (FBV)
 @login_required
 def create_appointment(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
             appointment = form.save(commit=False)
-            appointment.volunteer = request.user
+            appointment.volunteer = request.user  # Assign logged-in user as the volunteer
             appointment.save()
-            return redirect('appointment_list')
+            return redirect("appointment_list")
     else:
         form = AppointmentForm()
-    return render(request, 'appointments/create_appointment.html', {'form': form})
+    return render(request, "appointments/create_appointment.html", {"form": form})
 
+# Mark appointment as completed (FBV)
 @login_required
 def complete_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
-    appointment.status = 'completed'
-    appointment.save()
-    return redirect('appointment_list')
+    if request.user == appointment.volunteer:  # Ensure only the assigned volunteer can complete it
+        appointment.completed = True
+        appointment.save()
+    return redirect("appointment_list")
 
+# Delete an appointment (FBV)
 @login_required
 def delete_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
-    if request.method == 'POST':
+    if request.user == appointment.volunteer:
         appointment.delete()
-        return redirect('appointment_list')
-    return render(request, 'appointments/delete_appointment.html', {'appointment': appointment})
- 
+    return redirect("appointment_list")
