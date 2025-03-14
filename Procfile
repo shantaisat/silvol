@@ -1,1 +1,1 @@
-web: gunicorn silvol.wsgi
+web: gunicorn silvol.wsgi --log-file -
