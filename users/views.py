@@ -15,7 +15,7 @@ def profile_view(request):
 # Edit Profile
 @login_required
 def edit_profile(request):
-    from .forms import EditProfileForm  # ✅ Move import inside function to avoid circular import
+    from .forms import EditProfileForm  # Move import inside function to avoid circular import
     
     profile = get_object_or_404(UserProfile, user=request.user)  
     if request.method == "POST":

@@ -1,38 +1,49 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django import forms
 from .models import UserProfile
-from .forms import EditProfileForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Field
+from django.core.exceptions import ValidationError
 
-def home(request):
-    return render(request, 'index.html')  # Render your index.html template
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['biography', 'skills', 'availability', 'contact_info', 'languages_spoken']
+        # You can add widgets here to customize form field input styles if needed
+        widgets = {
+            'biography': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Write a short biography'}),
+            'skills': forms.Textarea(attrs={'rows': 3, 'placeholder': 'List your skills, separated by commas'}),
+            'contact_info': forms.TextInput(attrs={'placeholder': 'Your contact information (email, phone)'}),
+            'languages_spoken': forms.TextInput(attrs={'placeholder': 'Languages you speak'}),
+            'availability': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Your availability details'}),
+        }
 
-# User Profile View
-@login_required
-def profile_view(request):
-    profile = get_object_or_404(UserProfile, user=request.user)
-    return render(request, "users/profile.html", {"profile": profile})
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.add_input(Submit('submit', 'Save Changes', css_class='btn btn-primary'))
 
-# Edit Profile
-@login_required
-def edit_profile(request):
-    profile = get_object_or_404(UserProfile, user=request.user)  # Get the user's profile
-    if request.method == "POST":
-        form = EditProfileForm(request.POST, request.FILES, instance=profile)  # Use EditProfileForm and handle file uploads
-        if form.is_valid():
-            form.save()
-            return redirect("profile")  # Redirect to the profile view after saving
-    else:
-        form = EditProfileForm(instance=profile)  # Pre-fill form with the current profile data
+        # Additional customizations
+        self.helper.form_class = 'form-horizontal'  # You can adjust form class for styling
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-10'
 
-    return render(request, "users/edit_profile.html", {"form": form})
+        # Ensure some fields are required based on your needs
+        self.fields['biography'].required = True
+        self.fields['skills'].required = True
+        self.fields['availability'].required = True
 
-# Delete Account
-@login_required
-def delete_account(request):
-    user = request.user
-    profile = get_object_or_404(UserProfile, user=user)
-    profile.delete()  # Delete the user's profile
-    user.delete()  # Delete the user account
-    logout(request)  # Log out after deleting the account
-    return redirect("home")  # Redirect to the homepage after deletion
+    # Optional: You can add additional clean methods to validate fields.
+    def clean_contact_info(self):
+        contact_info = self.cleaned_data.get('contact_info')
+        if not contact_info:
+            raise ValidationError("Please provide your contact information.")
+        return contact_info
+
+    def clean_languages_spoken(self):
+        languages_spoken = self.cleaned_data.get('languages_spoken')
+        if languages_spoken and len(languages_spoken.split(',')) > 5:
+            raise ValidationError("Please limit the number of languages to 5.")
+        return languages_spoken
+
+    
