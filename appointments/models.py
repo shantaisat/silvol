@@ -18,14 +18,6 @@ class Appointment(models.Model):
     ]
 
 
-
-
-class Appointment(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('completed', 'Completed'),
-    ]
-
     title = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField()

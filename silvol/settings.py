@@ -48,10 +48,11 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    #'allauth.socialaccount',
+    #'allauth.socialaccount.providers.google',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -73,13 +74,22 @@ SITE_ID = 1  # Required for django-allauth
 LOGIN_REDIRECT_URL = '/'  # Redirect after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  # Users log in with email
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False  # Only use email for authentication
-ACCOUNT_SIGNUP_REDIRECT_URL = '/appointments/'  # Redirect after signup
-ACCOUNT_EMAIL_VERIFICATION = 'optional'  # Change to 'mandatory' if needed
+# Allauth settings for email verification
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Do not require email verification
+#ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']  # Ensure email is included for signup
+#ACCOUNT_EMAIL_REQUIRED = True  # Email is required for signup (this should be inferred from SIGNUP_FIELDS)
 
+# After signup, redirect to appointments page
+#ACCOUNT_SIGNUP_REDIRECT_URL = '/appointments/'
 
+# Automatically log in users after signing up
+#ACCOUNT_LOGIN_ON_SIGNUP = True
+
+# Use only the email for login (implicitly handled by SIGNUP_FIELDS)
+# Remove ACCOUNT_LOGIN_METHODS if unnecessary:
+# ACCOUNT_LOGIN_METHODS = ['email']  # This can be removed, as 'email' is inferred from SIGNUP_FIELDS
+
+# Configure Django Summernote
 
 # Configure Crispy Forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -177,6 +187,12 @@ USE_TZ = True
 STATIC_URL = '/static/' 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files (Images)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 

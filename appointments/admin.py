@@ -5,7 +5,9 @@ from .models import Appointment, Skill
 class AppointmentAdmin(SummernoteModelAdmin):
     summernote_fields = ('description',)
 
-admin.site.register(Appointment, AppointmentAdmin)
+# Check if models are already registered before registering
+if not admin.site.is_registered(Appointment):
+    admin.site.register(Appointment, AppointmentAdmin)
 
-# Register Skill model to manage skills through the admin
-admin.site.register(Skill)
+if not admin.site.is_registered(Skill):
+    admin.site.register(Skill)

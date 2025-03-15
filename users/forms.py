@@ -1,16 +1,38 @@
-from django import forms
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from .models import UserProfile
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from .forms import EditProfileForm
 
-class EditProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['biography', 'skills', 'availability', 'contact_info', 'languages_spoken']
+def home(request):
+    return render(request, 'index.html')  # Render your index.html template
 
-    def __init__(self, *args, **kwargs):
-        super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'POST'
-        self.helper.add_input(Submit('submit', 'Save Changes'))
-# {% for appointment in appointments %}
+# User Profile View
+@login_required
+def profile_view(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+    return render(request, "users/profile.html", {"profile": profile})
+
+# Edit Profile
+@login_required
+def edit_profile(request):
+    profile = get_object_or_404(UserProfile, user=request.user)  # Get the user's profile
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES, instance=profile)  # Use EditProfileForm and handle file uploads
+        if form.is_valid():
+            form.save()
+            return redirect("profile")  # Redirect to the profile view after saving
+    else:
+        form = EditProfileForm(instance=profile)  # Pre-fill form with the current profile data
+
+    return render(request, "users/edit_profile.html", {"form": form})
+
+# Delete Account
+@login_required
+def delete_account(request):
+    user = request.user
+    profile = get_object_or_404(UserProfile, user=user)
+    profile.delete()  # Delete the user's profile
+    user.delete()  # Delete the user account
+    logout(request)  # Log out after deleting the account
+    return redirect("home")  # Redirect to the homepage after deletion
