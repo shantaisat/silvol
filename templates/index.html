@@ -10,7 +10,7 @@
         <p class="lead">Connecting tech-savvy volunteers with elderly individuals who need tech support.</p>
         
         {% if user.is_authenticated %}
-            <h3 class="mt-4">Hello, {{ user.email }}!</h3>
+            <h3 class="mt-4">Hello, {{ user.username }}!</h3>
             <p>Explore available appointments or manage your profile.</p>
             <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
             <a href="{% url 'appointment_list' %}" class="btn btn-success btn-lg">View Appointments</a>
