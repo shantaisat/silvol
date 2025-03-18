@@ -41,6 +41,8 @@ ALLOWED_HOSTS = [
     'silvol-3630ff49165c.herokuapp.com',
     'silvol.herokuapp.com',
     '127.0.0.1:8000/users/profile/edit/',
+    '127.0.0.1:8000/users/profile/',
+    '127.0.0.1:8000/availability/',
 ]
 
 

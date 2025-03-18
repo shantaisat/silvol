@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Volunteer Availability</h1>
+
+  <!-- Display Availability in List Format -->
+  <ul>
+    {% for availability in availabilities %}
+      <li>
+        {{ availability.volunteer.username }}: 
+        {{ availability.start_time }} to {{ availability.end_time }} - {{ availability.description }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Calendar Display -->
+  <div id="calendar"></div>
+
+  <!-- FullCalendar CDN (Move to Base Template if Used in Multiple Pages) -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+  $(document).ready(function() {
+      $('#calendar').fullCalendar({
+          events: [
+              {% for availability in availabilities %}
+              {
+                  title: '{{ availability.volunteer.username }}',
+                  start: '{{ availability.start_time|date:"Y-m-d\TH:i:s" }}',
+                  end: '{{ availability.end_time|date:"Y-m-d\TH:i:s" }}',
+              },
+              {% endfor %}
+          ]
+      });
+  });
+  </script>
+
+{% endblock %}

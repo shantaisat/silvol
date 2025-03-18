@@ -3,6 +3,7 @@ from .models import UserProfile
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Field
 from django.core.exceptions import ValidationError
+from .models import Availability
 
 class EditProfileForm(forms.ModelForm):
     class Meta:
@@ -46,4 +47,14 @@ class EditProfileForm(forms.ModelForm):
             raise ValidationError("Please limit the number of languages to 5.")
         return languages_spoken
 
-    
+class AvailabilityForm(forms.ModelForm):
+    class Meta:
+        model = Availability
+        fields = ['start_time', 'end_time', 'description']
+
+    def __init__(self, *args, **kwargs):
+        super(AvailabilityForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.add_input(Submit('submit', 'Save Availability'))
+   
