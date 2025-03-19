@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1:8000/users/profile/edit/',
     '127.0.0.1:8000/users/profile/',
     '127.0.0.1:8000/availability/',
+    '127.0.0.1:8000/users/profile/edit_availability/',
 ]
 
 
@@ -74,16 +75,21 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1  # Required for django-allauth
 
-LOGIN_REDIRECT_URL = '/'  # Redirect after login
+LOGIN_REDIRECT_URL = 'profile'  # Redirect to profile page after login  
+
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 # Allauth settings for email verification
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # Do not require email verification
+#ACCOUNT_USERNAME_REQUIRED = False  # If you want email-only login
 #ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']  # Ensure email is included for signup
-#ACCOUNT_EMAIL_REQUIRED = True  # Email is required for signup (this should be inferred from SIGNUP_FIELDS)
-
+ACCOUNT_EMAIL_REQUIRED = False  # Email is required for signup (this should be inferred from SIGNUP_FIELDS)
+#ACCOUNT_AUTHENTICATION_METHOD = 'email'  # Options: 'username', 'email', or 'username_email'
 # After signup, redirect to appointments page
 #ACCOUNT_SIGNUP_REDIRECT_URL = '/appointments/'
+
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username', 'password1*', 'password2*']  # Asterisk marks required fields
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}  # Use email for authentication
 
 # Automatically log in users after signing up
 #ACCOUNT_LOGIN_ON_SIGNUP = True

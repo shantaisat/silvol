@@ -67,16 +67,18 @@ def view_availability(request):
    
     return render(request, 'users/view_availability.html', {'availabilities': availabilities})
 
+# Edit Availability
 @login_required
 def edit_availability(request, availability_id):
+    # Fetch the availability or return a 404 if not found or if it doesn't belong to the user
     availability = get_object_or_404(Availability, id=availability_id, volunteer=request.user)
-    
-    if request.method == 'POST':
+
+    if request.method == "POST":
         form = AvailabilityForm(request.POST, instance=availability)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirect to the profile page after editing
+            return redirect('view_availability')  # Redirect to view after saving
     else:
         form = AvailabilityForm(instance=availability)
 
-    return render(request, 'users/edit_availability.html', {'form': form})
+    return render(request, 'users/edit_availability.html', {'form': form, 'availability': availability})

@@ -1,55 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Volunteer Availability</h1>
+
+  <h1>My Volunteer Availability</h1>
 
   <!-- Display Availability in List Format -->
-  <ul>
+  <div>
     {% for availability in availabilities %}
-      <li>
-        {{ availability.volunteer.username }}: 
-        {{ availability.start_time }} to {{ availability.end_time }} - {{ availability.description }}
-      <!-- Add Edit Availability Link -->
-      <a href="{% url 'edit_availability' availability.id %}">Edit Availability</a>
-      </li>
+        <div>
+            <p>{{ availability.start_time }} - {{ availability.end_time }}</p>
+            <a href="{% url 'edit_availability' availability.id %}">Edit</a> <!-- Link to edit availability -->
+        </div>
+    {% empty %}
+        <p>No availability records found.</p> <!-- Message if no records exist -->
     {% endfor %}
-  </ul>
+  </div>
 
   <!-- Calendar Display -->
   <div id="calendar"></div>
 
-  <!-- FullCalendar CDN (Move to Base Template if Used in Multiple Pages) -->
- <!-- FullCalendar v5 Styles & Scripts -->
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- FullCalendar v5 Styles & Scripts -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-  
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',  // Month view by default
-          headerToolbar: {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          },
-          events: [
-              {% for availability in availabilities %}
-              {
-                  title: '{{ availability.volunteer.username }}',
-                  start: '{{ availability.start_time|date:"Y-m-d\TH:i:s" }}',
-                  end: '{{ availability.end_time|date:"Y-m-d\TH:i:s" }}',
-              },
-              {% endfor %}
-          ]
-      });
-  
-      calendar.render();
-  });
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+    
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',  // Month view by default
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: [
+                {% for availability in availabilities %}
+                {
+                    title: '{{ availability.volunteer.username }}',  // Volunteer name as event title
+                    start: '{{ availability.start_time|date:"Y-m-d\TH:i:s" }}',  // Start date in ISO format
+                    end: '{{ availability.end_time|date:"Y-m-d\TH:i:s" }}',  // End date in ISO format
+                },
+                {% endfor %}
+            ]
+        });
+    
+        calendar.render();
+    });
   </script>
 
 {% endblock %}

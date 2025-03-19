@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from users.views import home, profile_view, edit_profile, delete_account  # Import the views
+from users.views import home, profile_view, edit_profile, delete_account, edit_availability  # Import the views
 
 urlpatterns = [
     path('', home, name='home'),  # Add home view here
@@ -28,6 +28,7 @@ urlpatterns = [
     path('delete_account/', delete_account, name='delete_account'),  # Delete account view
     path('users/', include('users.urls')),  # Include the users app URLs
     path('users/', include('users.urls')),  # Users app URLs
+    path('profile/edit_availability/<int:availability_id>/', edit_availability, name='edit_availability'),
     path('appointments/', include('appointments.urls')),  # Appointments app URLs
     path('accounts/', include('allauth.urls')),  # Allauth handles authentication
     path('summernote/', include('django_summernote.urls')),  # Summernote URL
