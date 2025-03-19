@@ -88,6 +88,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'  # Do not require email verification
 # After signup, redirect to appointments page
 #ACCOUNT_SIGNUP_REDIRECT_URL = '/appointments/'
 
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}  # Use custom signup form
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username', 'password1*', 'password2*']  # Asterisk marks required fields
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}  # Use email for authentication
 

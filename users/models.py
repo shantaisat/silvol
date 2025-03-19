@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+#from .models import UserProfile
 
 # Home view
 class UserProfile(models.Model):
@@ -11,7 +14,7 @@ class UserProfile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    user_type = models.CharField(max_length=20, choices=[('volunteer', 'Volunteer'), ('referral', 'Referral')])
     skills = models.TextField(blank=True, null=True)
     availability = models.TextField(blank=True, null=True)
     biography = models.TextField(blank=True, null=True)
@@ -32,6 +35,19 @@ class UserProfile(models.Model):
                 raise ValidationError('Skills are required for volunteers.')
             if not self.availability:
                 raise ValidationError('Availability is required for volunteers.')
+
+
+ #           
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and not hasattr(instance, 'userprofile'):
+        UserProfile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userprofile.save()
+
 
 class Availability(models.Model):
     volunteer = models.ForeignKey(User, on_delete=models.CASCADE)

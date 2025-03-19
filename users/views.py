@@ -4,8 +4,8 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
-from .models import UserProfile, Availability
-from .forms import AvailabilityForm, EditProfileForm
+from users.models import UserProfile, Availability  # ✅ Make sure these are properly defined in models.py
+from users.forms import AvailabilityForm, EditProfileForm
 
 # Home view
 def home(request):
