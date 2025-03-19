@@ -2,6 +2,10 @@
 
 {% block content %}
 <h2>Edit Availability</h2>
+<form method="post" action="{% url 'delete_availability' availability.id %}" onsubmit="return confirm('Are you sure you want to delete this availability?');">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete Availability</button>
+</form>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

@@ -15,7 +15,7 @@ class EditProfileForm(forms.ModelForm):
             'skills': forms.Textarea(attrs={'rows': 3, 'placeholder': 'List your skills, separated by commas'}),
             'contact_info': forms.TextInput(attrs={'placeholder': 'Your contact information (email, phone)'}),
             'languages_spoken': forms.TextInput(attrs={'placeholder': 'Languages you speak'}),
-            'availability': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Your availability details'}),
+            #'availability': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Your availability details'}),
         }
 
     def __init__(self, *args, **kwargs):

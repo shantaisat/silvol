@@ -6,7 +6,8 @@ from .views import (
     delete_account,
     set_availability,
     view_availability,
-    edit_availability,   
+    edit_availability,  
+    delete_availability 
 )
 from django.views.generic import TemplateView
 
@@ -18,6 +19,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),  # Django-allauth URLs
     path("profile/view_availability/", view_availability, name="view_availability"),  # View availability
     path('profile/edit_availability/<int:availability_id>/', edit_availability, name='edit_availability'),
-    
+    path('profile/delete_availability/<int:availability_id>/', delete_availability, name='delete_availability'),
     path("goodbye/", TemplateView.as_view(template_name="goodbye.html"), name="goodbye"),  # Goodbye page
 ]

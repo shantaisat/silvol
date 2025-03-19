@@ -83,7 +83,7 @@ LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # Do not require email verification
 #ACCOUNT_USERNAME_REQUIRED = False  # If you want email-only login
 #ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']  # Ensure email is included for signup
-ACCOUNT_EMAIL_REQUIRED = False  # Email is required for signup (this should be inferred from SIGNUP_FIELDS)
+#ACCOUNT_EMAIL_REQUIRED = False  # Email is required for signup (this should be inferred from SIGNUP_FIELDS)
 #ACCOUNT_AUTHENTICATION_METHOD = 'email'  # Options: 'username', 'email', or 'username_email'
 # After signup, redirect to appointments page
 #ACCOUNT_SIGNUP_REDIRECT_URL = '/appointments/'
