@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-@(t0gsw6_=2h3t*jfgateurlr7^&+z*k%prs-870scwv4w6pa8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -75,7 +75,7 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1  # Required for django-allauth
 
-LOGIN_REDIRECT_URL = 'profile'  # Redirect to profile page after login  
+LOGIN_REDIRECT_URL = 'home'  # Redirect to profile page after login  
 
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
