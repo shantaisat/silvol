@@ -4,23 +4,64 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
-from users.models import UserProfile, Availability  # ✅ Make sure these are properly defined in models.py
+from users.models import UserProfile, Availability  #  Make sure these are properly defined in models.py
 from users.forms import AvailabilityForm, EditProfileForm
+from django.db.models import Q # Import Q for complex queries
 
 # Home view
 def home(request):
     return render(request, 'index.html')
 
+@login_required
+def profile(request):
+    return render(request, 'profile.html', {'profile': request.user.userprofile})
+
+
+
+@login_required
+# Use a view to render the volunteers_list page
+def volunteer_list(request):
+    volunteers = UserProfile.objects.filter(user_type='volunteer')
+    return render(request, 'volunteers_list.html', {'volunteers': volunteers})
+
 # Profile View
 @login_required
 def profile_view(request):
+    # Fetch the UserProfile for the logged-in user
     profile = get_object_or_404(UserProfile, user=request.user)
-    availabilities = Availability.objects.filter(volunteer=request.user)
+
+    # Fetch availabilities associated with the UserProfile
+    availabilities = Availability.objects.filter(volunteer=profile)
 
     return render(request, "users/profile.html", {
         "profile": profile,
         "availabilities": availabilities
     })
+
+# List of Volunteers
+@login_required
+def volunteer_list(request):
+    query = request.GET.get('q', '')  # Get search query from GET parameters
+
+    if query:
+        # If there's a search query, filter volunteers based on username and user_type
+        volunteers = UserProfile.objects.filter(
+            user__username__icontains=query,
+            user_type='volunteer'  # Only include volunteers
+        )
+    else:
+        # If there's no search query, return all volunteers
+        volunteers = UserProfile.objects.filter(user_type='volunteer')  # Only volunteers
+
+    return render(request, "users/volunteers_list.html", {"volunteers": volunteers, "query": query})
+
+# Volunteer Detail
+@login_required
+def volunteer_detail(request, id):
+    volunteer = get_object_or_404(UserProfile, id=id)
+    return render(request, "users/volunteer_detail.html", {"volunteer": volunteer})
+
+
 
 # Edit Profile
 @login_required
@@ -53,7 +94,8 @@ def set_availability(request):
         form = AvailabilityForm(request.POST)
         if form.is_valid():
             availability = form.save(commit=False)
-            availability.volunteer = request.user  # Associate the logged-in user
+            # Fetch the UserProfile for the logged-in user
+            availability.volunteer = request.user.userprofile  # Use the UserProfile instance
             availability.save()
             return redirect('profile')  # Redirect after successful submission
     else:
@@ -64,15 +106,28 @@ def set_availability(request):
 # View Availability
 @login_required
 def view_availability(request):
-    availabilities = Availability.objects.filter(volunteer=request.user)
-   
-    return render(request, 'users/view_availability.html', {'availabilities': availabilities})
+    # Fetch the UserProfile for the logged-in user
+    user_profile = request.user.userprofile
+
+    # Fetch availabilities associated with the UserProfile
+    availabilities = Availability.objects.filter(volunteer=user_profile)
+
+    return render(request, 'users/view_availability.html', {'availabilities': availabilities})    # View Availability
+    @login_required
+    def view_availability(request):
+        # Fetch the UserProfile for the logged-in user
+        user_profile = request.user.userprofile
+    
+        # Fetch availabilities associated with the UserProfile
+        availabilities = Availability.objects.filter(volunteer=user_profile)
+    
+        return render(request, 'users/view_availability.html', {'availabilities': availabilities})
 
 # Edit Availability
 @login_required
 def edit_availability(request, availability_id):
-    # Fetch the availability or return a 404 if not found or if it doesn't belong to the user
-    availability = get_object_or_404(Availability, id=availability_id, volunteer=request.user)
+    # Fetch the availability or return a 404 if not found or if it doesn't belong to the user's UserProfile
+    availability = get_object_or_404(Availability, id=availability_id, volunteer=request.user.userprofile)
 
     if request.method == "POST":
         form = AvailabilityForm(request.POST, instance=availability)
@@ -83,10 +138,12 @@ def edit_availability(request, availability_id):
         form = AvailabilityForm(instance=availability)
 
     return render(request, 'users/edit_availability.html', {'form': form, 'availability': availability})
-
-login_required
+ 
+# Delete Availability
+@login_required
 def delete_availability(request, availability_id):
-    availability = get_object_or_404(Availability, id=availability_id, volunteer=request.user)
+    # Fetch the availability or return a 404 if not found or if it doesn't belong to the user's UserProfile
+    availability = get_object_or_404(Availability, id=availability_id, volunteer=request.user.userprofile)
     availability.delete()
     messages.success(request, "Availability deleted successfully.")
     return redirect('view_availability')  # Redirect to the availability list after deletion

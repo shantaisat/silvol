@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Volunteer Directory</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" class="mb-3">
+        <input type="text" name="q" class="form-control" placeholder="Search volunteers..." value="{{ query }}">
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
+    <div class="row">
+        {% for volunteer in volunteers %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ volunteer.user.username }}</h5>
+                    <p class="card-text">
+                        <strong>Skills:</strong> {{ volunteer.skills|default:"Not specified" }}<br>
+                        <strong>Languages:</strong> {{ volunteer.languages_spoken|default:"Not specified" }}
+                    </p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'volunteer_detail' volunteer.id %}" class="btn btn-info">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No volunteers found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

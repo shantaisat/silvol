@@ -26,9 +26,8 @@ urlpatterns = [
     path('profile/', profile_view, name='profile'),  # Profile view
     path('edit_profile/', edit_profile, name='edit_profile'),  # Edit profile view
     path('delete_account/', delete_account, name='delete_account'),  # Delete account view
-    path('users/', include('users.urls')),  # Include the users app URLs
     path('users/', include('users.urls')),  # Users app URLs
-    path('profile/edit_availability/<int:availability_id>/', edit_availability, name='edit_availability'),
+    #path('profile/edit_availability/<int:availability_id>/', edit_availability, name='edit_availability'),
     path('appointments/', include('appointments.urls')),  # Appointments app URLs
     path('accounts/', include('allauth.urls')),  # Allauth handles authentication
     path('summernote/', include('django_summernote.urls')),  # Summernote URL

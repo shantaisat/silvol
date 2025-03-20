@@ -80,6 +80,7 @@ LOGIN_REDIRECT_URL = 'profile'  # Redirect to profile page after login
 LOGOUT_REDIRECT_URL = '/'  # Redirect after logout
 
 # Allauth settings for email verification
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
 ACCOUNT_EMAIL_VERIFICATION = 'none'  # Do not require email verification
 #ACCOUNT_USERNAME_REQUIRED = False  # If you want email-only login
 #ACCOUNT_SIGNUP_FIELDS = ['email', 'password1', 'password2']  # Ensure email is included for signup

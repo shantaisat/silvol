@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">{{ volunteer.user.username }}'s Profile</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ volunteer.user.username }}</h5>
+            <p><strong>Skills:</strong> {{ volunteer.skills|default:"Not specified" }}</p>
+            <p><strong>Languages Spoken:</strong> {{ volunteer.languages_spoken|default:"Not specified" }}</p>
+            <p><strong>Availability:</strong> {{ volunteer.availability|default:"Not available" }}</p>
+        </div>
+    </div>
+    <a href="{% url 'volunteers_list' %}" class="btn btn-primary mt-3">Back to Volunteer List</a>
+</div>
+{% endblock %}

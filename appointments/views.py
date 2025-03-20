@@ -4,6 +4,19 @@ from django.views.generic import ListView, DetailView
 from .models import Appointment
 from .forms import AppointmentForm
 
+# Create your views here.
+
+@login_required
+def availability_calendar(request):
+    # Check if user is in the Referral group
+    if request.user.groups.filter(name="Referral").exists():
+        availabilities = Availability.objects.all()
+        return render(request, "appointments/availability.html", {"availabilities": availabilities})
+    else:
+        return render(request, "users/permission_denied.html")
+
+
+
 # List all appointments (CBV)
 class AppointmentListView(ListView):
     model = Appointment
