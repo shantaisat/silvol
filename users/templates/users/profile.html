@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
+{% endif %}
+
+
   <h1>{{ profile.user.username }}'s Profile</h1>
   <p>User Type: {{ profile.get_user_type_display }}</p>
   <p>Skills: {{ profile.skills }}</p>
@@ -10,10 +16,8 @@
   <p>Contact Info: {{ profile.contact_info }}</p>
   <p>Languages Spoken: {{ profile.languages_spoken }}</p>
 
-  {% if profile.profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
-  {% endif %}
-
+  
+  
   <a href="{% url 'edit_profile' %}">Edit Profile</a>
   <a href="{% url 'delete_account' %}">Delete Account</a>
   <a href="{% url 'view_availability' %}">View Availability</a>

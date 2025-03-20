@@ -35,7 +35,7 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['user_type', 'biography', 'skills', 'availability', 'contact_info', 'languages_spoken']
+        fields = ['user_type', 'biography', 'skills', 'availability', 'contact_info', 'languages_spoken', 'profile_picture']
         widgets = {
             'biography': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Write a short biography'}),
             'skills': forms.Textarea(attrs={'rows': 3, 'placeholder': 'List your skills'}),

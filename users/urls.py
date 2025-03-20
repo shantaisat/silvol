@@ -1,4 +1,6 @@
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 from .views import (
     home,
@@ -27,7 +29,7 @@ urlpatterns = [
 
     path('volunteers/', volunteer_list, name='volunteer_list'),  # Volunteer list
     path('volunteer/<int:id>/', volunteer_detail, name='volunteer_detail'),  # Volunteer detail
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container mt-4">
     <h2 class="text-center">{{ volunteer.user.username }}'s Profile</h2>
     <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ volunteer.user.username }}</h5>
+        <div class="card-body text-center">
+            <!-- Display Profile Picture -->
+            {% if volunteer.profile_picture %}
+                <img src="{{ volunteer.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
+            {% endif %}
+
+            <h5 class="card-title mt-3">{{ volunteer.user.username }}</h5>
             <p><strong>Skills:</strong> {{ volunteer.skills|default:"Not specified" }}</p>
             <p><strong>Languages Spoken:</strong> {{ volunteer.languages_spoken|default:"Not specified" }}</p>
-     <!--  <p><strong>Availability:</strong> {{ volunteer.availability|default:"Not available" }}</p> -->
             <p><strong>Contact Number:</strong> {{ volunteer.contact_info|default:"Not provided" }}</p>
             <p><strong>Biography:</strong> {{ volunteer.biography|default:"Not provided" }}</p>  
         </div>
