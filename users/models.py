@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from cloudinary.models import CloudinaryField
 
 
 
@@ -18,7 +19,9 @@ class UserProfile(models.Model):
     biography = models.TextField(blank=True, null=True)
     contact_info = models.CharField(max_length=255, blank=True, null=True)
     languages_spoken = models.CharField(max_length=255, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', default='https://res.cloudinary.com/dv76xhqok/image/upload/v1742855774/default-profile_bbotot.png')
+    profile_picture = CloudinaryField(
+        'image',
+        default='https://res.cloudinary.com/dv76xhqok/image/upload/v1742855774/default-profile_bbotot.png')
 
     def __str__(self):
         return f"{self.user.username} - {self.get_user_type_display()}"

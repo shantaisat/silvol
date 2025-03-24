@@ -61,14 +61,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',  
+    'cloudinary',
     'users',
     'appointments',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_summernote',
     'widget_tweaks',
-    'cloudinary_storage',
-    'cloudinary',
     #'django_extensions',
 ] 
 
@@ -205,11 +205,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Collects static files here
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
 # Cloudinary Configuration
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+    'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
 }
 
 
