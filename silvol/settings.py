@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-@(t0gsw6_=2h3t*jfgateurlr7^&+z*k%prs-870scwv4w6pa8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_summernote',
-    'django_extensions',
+    #'django_extensions',
 ] 
 
 AUTHENTICATION_BACKENDS = [
