@@ -5,6 +5,8 @@
 
 {% if profile.profile_picture %}
     <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
+{% else %}
+    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
 {% endif %}
 
 
