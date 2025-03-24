@@ -1,32 +1,43 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Welcome to Silvol{% endblock %}
 
 {% block content %}
 <div class="container text-center mt-5">
     <!-- Hero Section -->
-    <div class="jumbotron py-5 bg-light rounded">
-        <h1 class="display-4">Welcome to Silvol</h1>
-        <p class="lead">Connecting tech-savvy volunteers with elderly individuals who need tech support.</p>
-        
-        {% if user.is_authenticated %}
-            <h3 class="mt-4">Hello, {{ user.username }}!</h3>
-            <p>Explore available appointments or manage your profile.</p>
-            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
-            
-            {% if user.userprofile.user_type == "volunteer" %}
-                <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
-            {% elif user.userprofile.user_type == "referral" %}
-                <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+    <section class="hero-section text-center text-white d-flex align-items-center" style="background-image: url('/static/images/cover-images/seniorsplit.png'); background-size: cover; background-position: center; height: 400px;">
+        <div class="container text-center">
+            <!--<div class="jumbotron py-5 bg-light rounded" style="background: rgba(255, 255, 255, 0.0);">-->
+                <h1 class="display-4">Welcome to Silvol</h1>
+                <p class="lead">Connecting tech-savvy volunteers with elderly individuals who need tech support.</p>
+                <!-- Call to Action Buttons -->
+        <div class="mt-4">
+            {% if user.is_authenticated %}
+                <h3 class="mt-4">Hello, {{ user.username }}!</h3>
+                <p>Explore available appointments or manage your profile.</p>
+                <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+                
+                {% if user.userprofile.user_type == "volunteer" %}
+                    <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
+                {% elif user.userprofile.user_type == "referral" %}
+                    <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+                <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
             {% endif %}
-        {% else %}
-            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
-            <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
-        {% endif %}
+        </div>
     </div>
+</section>
+            </div>
+        </div>
+    </section>
+        
 
     <!-- About Silvol -->
-    <div class="row mt-5">
+<div class="container mt-5">
+    <div class="row">
         <div class="col-md-6">
             <h2>How Silvol Works</h2>
             <p>Silvol helps elderly individuals get the tech support they need by connecting them with volunteers. Volunteers assist with apps like Zoom, WhatsApp, Alexa, Google services, and more.</p>
@@ -36,17 +47,45 @@
             <p>Sign up as a volunteer or request help from a tech-savvy individual who can guide you step by step.</p>
         </div>
     </div>
+</div>
 
     <!-- Available Tech Support Section -->
-    <div class="mt-5">
-        <h2>We Can Help With:</h2>
-        <div class="row">
-            <div class="col-md-3"><p>📱 WhatsApp</p></div>
-            <div class="col-md-3"><p>🎥 Zoom</p></div>
-            <div class="col-md-3"><p>🔊 Alexa</p></div>
-            <div class="col-md-3"><p>🌍 Google Services</p></div>
+<div class="tech-support-section mt-5" style="background-image: url('{% static "images/banner/yllwbannerone.png" %}'); background-size: cover; background-position: center; padding: 50px 0;">
+    <div class="container">
+        <h2 class="text-center text-white">We Can Help With:</h2>
+        <div class="scrolling-container mt-4">
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/whatsapp.png' %}" alt="WhatsApp" class="img-fluid">
+                <p> WhatsApp</p>
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/zoom.png' %}" alt="Zoom" class="img-fluid">
+                <p> Zoom</p>
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/alexa.png' %}" alt="Alexa" class="img-fluid">
+                <p>Alexa</p>
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/google_meets.png' %}" alt="Google Services" class="img-fluid">
+                <p> Google Services</p>
+            </div>
+            <!-- Duplicate items for seamless scrolling -->
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/teams.png' %}" alt="Microsoft Teams" class="img-fluid">
+                <p> Microsoft Teams</p>
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/facebook.png' %}" alt="Facebook" class="img-fluid">
+                <p> Facebook</p>
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'images/app-icons/facetime.png' %}" alt="Facetime" class="img-fluid">
+                <p> Facetime</p>
+            </div>
         </div>
     </div>
+</div>
 
     <!-- Call to Action -->
     <div class="mt-5">
@@ -66,4 +105,27 @@
 {% endif %}
     </div>
 </div>
+{% endblock %}
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollingContainer = document.querySelector(".scrolling-container");
+
+        let scrollAmount = 0;
+
+        function autoScroll() {
+            scrollAmount += 1; // Adjust the scroll speed here
+            scrollingContainer.scrollLeft = scrollAmount;
+
+            // Reset scroll position to create a seamless loop
+            if (scrollAmount >= scrollingContainer.scrollWidth / 2) {
+                scrollAmount = 0;
+            }
+
+            requestAnimationFrame(autoScroll);
+        }
+
+        autoScroll();
+    });
+</script>
 {% endblock %}
