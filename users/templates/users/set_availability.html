@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Set Your Availability</h1>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Availability</button>
-  </form>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Set Your Availability</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                  {% load widget_tweaks %}
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Render the form fields -->
+                        {{ form.non_field_errors }}
+                        <div class="mb-3">
+                            <label for="id_start_time" class="form-label"><strong>Start Time</strong></label>
+                            {{ form.start_time|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_end_time" class="form-label"><strong>End Time</strong></label>
+                            {{ form.end_time|add_class:"form-control" }}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block">Save Availability</button>
+                        </div>
+                    </form>
+                    <!-- Button to View Availability -->
+                    <div class="text-center mt-3">
+                      <a href="{% url 'view_availability' %}" class="btn btn-secondary">View Availability</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

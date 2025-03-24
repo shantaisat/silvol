@@ -3,51 +3,74 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="text-center">{{ volunteer.user.username }}'s Profile</h2>
-    <div class="card">
-        <div class="card-body text-center">
-            <!-- Display Profile Picture -->
-            {% if volunteer.profile_picture %}
-                <img src="{{ volunteer.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
-            {% else %}
-                <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
-            {% endif %}
+    <!-- Volunteer Profile Header -->
+    <h2 class="text-center mb-4">{{ volunteer.user.username }}'s Profile</h2>
 
-            <h5 class="card-title mt-3">{{ volunteer.user.username }}</h5>
-            <p><strong>Skills:</strong> {{ volunteer.skills|default:"Not specified" }}</p>
-            <p><strong>Languages Spoken:</strong> {{ volunteer.languages_spoken|default:"Not specified" }}</p>
-            <p><strong>Contact Number:</strong> {{ volunteer.contact_info|default:"Not provided" }}</p>
-            <p><strong>Biography:</strong> {{ volunteer.biography|default:"Not provided" }}</p>  
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <!-- Display Profile Picture -->
+                    {% if volunteer.profile_picture %}
+                        <img src="{{ volunteer.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="img-thumbnail rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                    {% endif %}
+                    <h5 class="card-title">{{ volunteer.user.username }}</h5>
+                    <p class="text-muted">{{ volunteer.get_user_type_display }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volunteer Details -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Volunteer Details</h5>
+                    <p><strong>Skills:</strong> {{ volunteer.skills|default:"Not specified" }}</p>
+                    <p><strong>Languages Spoken:</strong> {{ volunteer.languages_spoken|default:"Not specified" }}</p>
+                    <p><strong>Contact Number:</strong> {{ volunteer.contact_info|default:"Not provided" }}</p>
+                    <p><strong>Biography:</strong> {{ volunteer.biography|default:"Not provided" }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Availability Calendar -->
-    <h3 class="mt-4">Availability Calendar</h3>
-    <table class="table table-bordered mt-3">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for availability in volunteer.volunteer_availability.all %}
-                <tr>
-                    <td>{{ availability.start_time|date:"D, M j, Y" }}</td>
-                    <td>{{ availability.start_time|time:"h:i A" }}</td>
-                    <td>{{ availability.end_time|time:"h:i A" }}</td>
-                    <td>{{ availability.description|default:"No description" }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4" class="text-center">No availability marked.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="mt-4">
+        <h3 class="text-center">Availability Calendar</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered mt-3">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for availability in volunteer.volunteer_availability.all %}
+                        <tr>
+                            <td>{{ availability.start_time|date:"D, M j, Y" }}</td>
+                            <td>{{ availability.start_time|time:"h:i A" }}</td>
+                            <td>{{ availability.end_time|time:"h:i A" }}</td>
+                            <td>{{ availability.description|default:"No description" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">No availability marked.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <a href="{% url 'volunteer_list' %}" class="btn btn-primary mt-3">Back to Volunteer List</a>
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'volunteer_list' %}" class="btn btn-primary">Back to Volunteer List</a>
+    </div>
 </div>
 {% endblock %}

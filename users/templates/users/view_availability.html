@@ -1,34 +1,54 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">My Volunteer Availability</h2>
 
-  <h1>My Volunteer Availability</h1>
-
-  <!-- Display Availability in List Format -->
-  <div>
-    {% for availability in availabilities %}
-        <div>
-            <p>{{ availability.start_time }} - {{ availability.end_time }}</p>
-            <a href="{% url 'edit_availability' availability.id %}">Edit</a> <!-- Link to edit availability -->
+    <!-- Availability List -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Availability List</h5>
+                    {% for availability in availabilities %}
+                        <div class="mb-3">
+                            <p><strong>Start:</strong> {{ availability.start_time|date:"D, M j, Y h:i A" }}</p>
+                            <p><strong>End:</strong> {{ availability.end_time|date:"D, M j, Y h:i A" }}</p>
+                            <div class="text-center">
+                                <a href="{% url 'edit_availability' availability.id %}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{% url 'delete_availability' availability.id %}" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                        </div>
+                        <hr>
+                    {% empty %}
+                        <p class="text-center">No availability records found.</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    {% empty %}
-        <p>No availability records found.</p> <!-- Message if no records exist -->
-    {% endfor %}
-  </div>
 
-  <!-- Calendar Display -->
-  <div id="calendar"></div>
+        <!-- Calendar Display -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Availability Calendar</h5>
+                    <div id="calendar" style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-  <!-- FullCalendar v5 Styles & Scripts -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- FullCalendar v5 Styles & Scripts -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-    
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',  // Month view by default
             headerToolbar: {
@@ -39,16 +59,17 @@
             events: [
                 {% for availability in availabilities %}
                 {
-                    title: '{{ availability.volunteer.username }}',  // Volunteer name as event title
+                    title: 'Available',  // Event title
                     start: '{{ availability.start_time|date:"Y-m-d\TH:i:s" }}',  // Start date in ISO format
                     end: '{{ availability.end_time|date:"Y-m-d\TH:i:s" }}',  // End date in ISO format
+                    backgroundColor: '#28a745',  // Green for availability
+                    borderColor: '#28a745'
                 },
                 {% endfor %}
             ]
         });
-    
+
         calendar.render();
     });
-  </script>
-
+</script>
 {% endblock %}

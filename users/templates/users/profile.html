@@ -2,47 +2,52 @@
 {% load static %}
 
 {% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm" style="width: 100%; margin: auto;">
+                {% if profile.profile_picture and profile.profile_picture.url %}
+                    <img src="{{ profile.profile_picture.url }}" class="card-img-top img-thumbnail" alt="Profile Picture" style="width: 100%; height: auto; object-fit: cover;">
+                {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" class="card-img-top img-thumbnail" alt="Default Profile Picture" style="width: 100%; height: auto; object-fit: cover;">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ profile.user.username }}</h5>
+                    <p class="card-text">User Type: {{ profile.get_user_type_display }}</p>
+                    <p class="card-text">Skills: {{ profile.skills }}</p>
+                    <p class="card-text">Availability: {{ profile.availability }}</p>
+                    <p class="card-text">Biography: {{ profile.biography }}</p>
+                    <p class="card-text">Contact Info: {{ profile.contact_info }}</p>
+                    <p class="card-text">Languages Spoken: {{ profile.languages_spoken }}</p>
+                    <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-sm">Edit Profile</a>
+                    <a href="{% url 'delete_account' %}" class="btn btn-danger btn-sm">Delete Account</a>
+                </div>
+            </div>
+        </div>
 
-{% if profile.profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
-{% else %}
-    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture" class="img-thumbnail rounded" style="width: 200px; height: 150px; object-fit: cover;">
-{% endif %}
-
-
-  <h1>{{ profile.user.username }}'s Profile</h1>
-  <p>User Type: {{ profile.get_user_type_display }}</p>
-  <p>Skills: {{ profile.skills }}</p>
-  <p>Availability: {{ profile.availability }}</p>
-  <p>Biography: {{ profile.biography }}</p>
-  <p>Contact Info: {{ profile.contact_info }}</p>
-  <p>Languages Spoken: {{ profile.languages_spoken }}</p>
-
-  
-  
-  <a href="{% url 'edit_profile' %}">Edit Profile</a>
-  <a href="{% url 'delete_account' %}">Delete Account</a>
-  <a href="{% url 'view_availability' %}">View Availability</a>
-  <a href="{% url 'set_availability' %}">Set Availability</a>
-
-  <h2>Availability Calendar</h2>
-  <div id='calendar'></div>
-
+        <!-- Calendar -->
+        <div class="col-md-8">
+            <h2 class="text-center">Availability Calendar</h2>
+            <div id="calendar" style="border: 1px solid #ddd; border-radius: 5px; padding: 10px;"></div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
-  <!-- FullCalendar CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
 
-  <!-- FullCalendar & Dependencies -->
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- FullCalendar & Dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <!-- Initialize FullCalendar -->
-  <script>
+<!-- Initialize FullCalendar -->
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-    
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             headerToolbar: {
@@ -62,9 +67,8 @@
                 {% endfor %}
             ]
         });
-    
+
         calendar.render();
     });
-    </script>
-    
+</script>
 {% endblock %}
