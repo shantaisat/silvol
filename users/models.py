@@ -29,6 +29,21 @@ class UserProfile(models.Model):
                 raise ValidationError('Skills are required for volunteers.')
             if not self.availability:
                 raise ValidationError('Availability is required for volunteers.')
+        elif self.user_type == 'referral':
+            if hasattr(self.user, 'referral_profile'):
+                raise ValidationError('A referral profile already exists for this user.')
+            
+class ReferralProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="referral_profile")
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    contact_number = models.CharField(max_length=15, blank=True, null=True)
+    languages_spoken = models.CharField(max_length=255, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - Referral"
+
 
 
 class Availability(models.Model):

@@ -3,8 +3,8 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.contrib.auth.models import Group
-from .models import UserProfile, Availability
-from .models import UserProfile
+from .models import UserProfile, Availability, ReferralProfile
+
 
 
 class CustomSignupForm(SignupForm):
@@ -28,6 +28,14 @@ class CustomSignupForm(SignupForm):
         user.groups.add(group)
 
         return user
+
+   
+# ReferralProfileForm should be defined at the top level 
+class ReferralProfileForm(forms.ModelForm):
+    class Meta:
+         model = ReferralProfile
+         fields = ['first_name', 'last_name', 'contact_number', 'languages_spoken', 'location']
+
 
 
 class EditProfileForm(forms.ModelForm):

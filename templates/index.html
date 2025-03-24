@@ -12,22 +12,23 @@
                 <h1 class="display-4">Welcome to Silvol</h1>
                 <p class="lead">Connecting tech-savvy volunteers with elderly individuals who need tech support.</p>
                 <!-- Call to Action Buttons -->
-        <div class="mt-4">
-            {% if user.is_authenticated %}
-                <h3 class="mt-4">Hello, {{ user.username }}!</h3>
-                <p>Explore available appointments or manage your profile.</p>
-                <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
-                
-                {% if user.userprofile.user_type == "volunteer" %}
-                    <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
-                {% elif user.userprofile.user_type == "referral" %}
-                    <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
-                {% endif %}
-            {% else %}
-                <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
-                <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
-            {% endif %}
-        </div>
+                <div class="mt-4">
+                    {% if user.is_authenticated %}
+                        <h3 class="mt-4">Hello, {{ user.username }}!</h3>
+                        <p>Explore available appointments or manage your profile.</p>
+                        
+                        {% if user.userprofile.user_type == "volunteer" %}
+                            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+                            <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
+                        {% elif user.userprofile.user_type == "referral" %}
+                            <a href="{% url 'referral_profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+                            <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+                        <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
+                    {% endif %}
+                </div>
     </div>
 </section>
             </div>
@@ -91,18 +92,20 @@
     <div class="mt-5">
         <h2>Ready to Get Started?</h2>
         {% if user.is_authenticated %}
-    <h3 class="mt-4">Hello, {{ user.username }}!</h3>
-    <p>Explore available appointments or manage your profile.</p>
-    
-    {% if user.userprofile.user_type == "volunteer" %}
-        <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
-    {% elif user.userprofile.user_type == "referral" %}
-        <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+        <h3 class="mt-4">Hello, {{ user.username }}!</h3>
+        <p>Explore available appointments or manage your profile.</p>
+        
+        {% if user.userprofile.user_type == "volunteer" %}
+            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+            <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
+        {% elif user.userprofile.user_type == "referral" %}
+            <a href="{% url 'referral_profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+            <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+        <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
     {% endif %}
-{% else %}
-    <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
-    <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
-{% endif %}
     </div>
 </div>
 {% endblock %}

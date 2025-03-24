@@ -18,12 +18,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from users.views import home, profile_view, edit_profile, delete_account, edit_availability  # Import the views
+#from users.views import home, profile_view, edit_profile, delete_account, edit_availability  # Import the views
+#from users.views import referral_profile_view
+from users.views import home, profile_view, edit_profile, delete_account, edit_availability, referral_profile_view
+
 
 urlpatterns = [
     path('', home, name='home'),  # Add home view here
+    path('', include('users.urls')),  # Include the users app's URLs
     path('admin/', admin.site.urls),
     path('profile/', profile_view, name='profile'),  # Profile view
+    path('referral-profile/', referral_profile_view, name='referral_profile'),  # Referral profile view
     path('edit_profile/', edit_profile, name='edit_profile'),  # Edit profile view
     path('delete_account/', delete_account, name='delete_account'),  # Delete account view
     path('users/', include('users.urls')),  # Users app URLs

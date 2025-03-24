@@ -4,7 +4,9 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
-from users.models import UserProfile, Availability  #  Make sure these are properly defined in models.py
+from users.models import UserProfile, Availability#  Make sure these are properly defined in models.py
+from .models import ReferralProfile
+from .forms import ReferralProfileForm
 from users.forms import AvailabilityForm, EditProfileForm
 from django.db.models import Q # Import Q for complex queries
 
@@ -37,6 +39,24 @@ def profile_view(request):
         "profile": profile,
         "availabilities": availabilities
     })
+
+@login_required
+def referral_profile_view(request):
+    # Check if the user already has a referral profile
+    referral_profile, created = ReferralProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = ReferralProfileForm(request.POST, instance=referral_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('referral_profile')  # Redirect to the same page or another page
+    else:
+        form = ReferralProfileForm(instance=referral_profile)
+
+    return render(request, 'users/referral_profile.html', {'form': form})
+ 
+
+
 
 # List of Volunteers
 @login_required
