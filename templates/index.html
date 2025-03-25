@@ -36,19 +36,18 @@
     </section>
         
 
-    <!-- About Silvol -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>How Silvol Works</h2>
-            <p>Silvol helps elderly individuals get the tech support they need by connecting them with volunteers. Volunteers assist with apps like Zoom, WhatsApp, Alexa, Google services, and more.</p>
+    <div class="container mt-5">
+        <div class="row py-5"> <!-- Add padding to the row -->
+            <div class="col-md-6 px-4"> <!-- Add horizontal padding to the column -->
+                <h2>How Silvol Works</h2>
+                <p>Silvol helps elderly individuals get the tech support they need by connecting them with volunteers. Volunteers assist with apps like Zoom, WhatsApp, Alexa, Google services, and more.</p>
+            </div>
+            <div class="col-md-6 px-5"> <!-- Add horizontal padding to the column -->
+                <h2>Get Started</h2>
+                <p>Sign up as a volunteer or request help from a tech-savvy individual who can guide you step by step.</p>
+            </div>
         </div>
-        <div class="col-md-6">
-            <h2>Get Started</h2>
-            <p>Sign up as a volunteer or request help from a tech-savvy individual who can guide you step by step.</p>
-        </div>
-    </div>
-</div>
+    </div>>
 
     <!-- Available Tech Support Section -->
 <div class="tech-support-section mt-5" style="background-image: url('{% static "images/banner/yllwbannerone.png" %}'); background-size: cover; background-position: center; padding: 50px 0;">
@@ -89,24 +88,27 @@
 </div>
 
     <!-- Call to Action -->
-    <div class="mt-5">
-        <h2>Ready to Get Started?</h2>
-        {% if user.is_authenticated %}
+<div class="mt-5 text-center">
+    <h2>Ready to Get Started?</h2>
+    {% if user.is_authenticated %}
         <h3 class="mt-4">Hello, {{ user.username }}!</h3>
         <p>Explore available appointments or manage your profile.</p>
-        
-        {% if user.userprofile.user_type == "volunteer" %}
-            <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
-            <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
-        {% elif user.userprofile.user_type == "referral" %}
-            <a href="{% url 'referral_profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
-            <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
-        {% endif %}
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            {% if user.userprofile.user_type == "volunteer" %}
+                <a href="{% url 'profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+                <a href="{% url 'set_availability' %}" class="btn btn-success btn-lg">Set Availability</a>
+            {% elif user.userprofile.user_type == "referral" %}
+                <a href="{% url 'referral_profile' %}" class="btn btn-primary btn-lg">Go to Your Profile</a>
+                <a href="{% url 'volunteer_list' %}" class="btn btn-success btn-lg">Meet The Volunteers</a>
+            {% endif %}
+        </div>
     {% else %}
-        <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
-        <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign Up</a>
+            <a href="{% url 'account_login' %}" class="btn btn-secondary btn-lg">Login</a>
+        </div>
     {% endif %}
-    </div>
+</div>
 </div>
 {% endblock %}
 {% block extra_js %}
