@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: none;
+    background-color: 0;
 }
 .container {
     max-width: 1080px; /* Set the maximum width for the container */
@@ -31,11 +31,11 @@ nav ul li a {
 }
 
 .bg-light {
-    background-color: 0 !important; /* Adjust the opacity as needed */
+    background-color: transparent !important; /* Adjust the opacity as needed */
 }
 
 .custom-bg {
-    background-color: 0 !important; /* Adjust the opacity as needed */
+    background-color: transparent !important; /* Adjust the opacity as needed */
     padding: 20px;
     border-radius: 10px;
 }
