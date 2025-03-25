@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: none;
+    background-color: transparent;
 }
 .container {
     max-width: 1080px; /* Set the maximum width for the container */
