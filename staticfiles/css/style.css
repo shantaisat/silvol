@@ -18,7 +18,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: space-around;
-    background: #007bff;
+    background:none;
     color: white;
     padding: 10px;
 }
@@ -72,4 +72,181 @@ nav ul li a {
     width: 100%; /* Make the image fit the container */
     height: auto; /* Maintain aspect ratio */
     border-radius: 5px; /* Add rounded corners to images */
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #FFB300; /* Custom green */
+    border-color: #FFC107;
+    color: #0c457a;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #FFB300; /* Slightly darker green */
+    border-color: #FFC107;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: #0c457a; /* Custom red */
+    border-color: #0c457a;
+    color: white;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #0c457a; /* Slightly darker red */
+    border-color: #0c457a;
+}
+
+/* Success Button */
+.btn-success {
+    background-color: hsl(207, 92%, 19%); /* Custom blue */
+    border-color: #1e405c;
+    color: white;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #1976D2; /* Slightly darker blue */
+    border-color: #1976D2;
+}
+
+/* Danger Button */
+.btn-danger {
+    background-color: #ff9800; /* Custom orange */
+    border-color: #ff9800;
+    color: white;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: #e68900; /* Slightly darker orange */
+    border-color: #e68900;
+}
+
+/* Warning Button */
+.btn-warning {
+    background-color: #FFC107; /* Custom yellow */
+    border-color: #FFC107;
+    color: black;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #FFB300; /* Slightly darker yellow */
+    border-color: #FFB300;
+}
+
+/* Info Button */
+./* Primary Button */
+.btn-primary {
+    background-color: #FFB300; /* Custom green */
+    border-color: #FFC107;
+    color: #1d242b;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #FFB300; /* Slightly darker green */
+    border-color: #FFC107;
+    color: #1d242b;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color:#1976D2; /* Custom red */
+    border-color: #3d80eb;
+    color: white;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #3d80eb; /* Slightly darker red */
+    border-color: #3d80eb;
+}
+
+/* Success Button */
+.btn-success {
+    background-color: #115695; /* Custom blue */
+    border-color: #115695;
+    color: white;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #115695; /* Slightly darker blue */
+    border-color: #115695;
+}
+
+/* Danger Button */
+.btn-danger {
+    background-color: #ff9800; /* Custom orange */
+    border-color: #ff9800;
+    color: white;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: #e68900; /* Slightly darker orange */
+    border-color: #e68900;
+}
+
+/* Warning Button */
+.btn-warning {
+    background-color: #FFC107; /* Custom yellow */
+    border-color: #FFC107;
+    color: 1d242b;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #FFB300; /* Slightly darker yellow */
+    border-color: #FFB300;
+}
+
+/* Info Button */
+.btn-info {
+    background-color:#0c457a ;
+    border-color: #0c457a;
+    color: white !important;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background-color: #3d80eb; /* Slightly darker cyan */
+    border-color: #3d80eb;
+}
+
+/* Light Button */
+.btn-light {
+    background-color: #f8f9fa; /* Custom light gray */
+    border-color: #f8f9fa;
+    color: black;
+}
+
+.btn-light:hover,
+.btn-light:focus {
+    background-color: #e2e6ea; /* Slightly darker gray */
+    border-color: #e2e6ea;
+}
+
+/* Dark Button */
+.btn-dark {
+    background-color: #567ea9; /* Custom dark gray */
+    border-color: #3384d5;
+    color: white;
+}
+
+.btn-dark:hover,
+.btn-dark:focus {
+    background-color: #23272b; /* Slightly darker gray */
+    border-color: #23272b;
+}
+
+/* Custom Footer Styles */
+/* Target only the bg-dark class inside the footer */
+footer.bg-dark {
+    background-color: #1e405c !important; /* Custom dark background for footer only */
 }
