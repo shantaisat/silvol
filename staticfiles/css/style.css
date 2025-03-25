@@ -1,252 +1,138 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: none;
+    background-color: transparent;
 }
+
 .container {
-    max-width: 1080px; /* Set the maximum width for the container */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 0; /* Add padding inside the container */
-    background: none; /* Set the background color to white */
-    border-radius: 0px; /* Add rounded corners */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */ 
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-
-
 
 nav ul {
     list-style: none;
-    padding: 0;
+    padding: 10px;
     display: flex;
     justify-content: space-around;
-    background:none;
+    background: transparent;
     color: white;
-    padding: 10px;
 }
-nav ul li {
-    display: inline;
-}
+
 nav ul li a {
     color: white;
     text-decoration: none;
 }
 
 .bg-light {
-    background-color: 0 !important; /* Adjust the opacity as needed */
+    background-color: transparent;
 }
 
 .custom-bg {
-    background-color: 0 !important; /* Adjust the opacity as needed */
+    background-color: transparent;
     padding: 20px;
     border-radius: 10px;
 }
 
-/* Tech Support Section */
-.tech-support-section {
-    padding: 20px 0; /* Add vertical padding */
-    background-color: #f8f9fa; /* Optional: Light background for the section */
-    text-align: center; /* Center-align the title */
-}
-
-/* Scrolling container */
-.scrolling-container {
-    display: flex; /* Enable horizontal layout */
-    overflow-x: hidden; /* Hide the horizontal scrollbar */
-    gap: 20px; /* Add space between items */
-    padding: 20px; /* Add padding inside the scrolling container */
-    position: relative; /* Ensure proper positioning for scrolling */
-}
-
-/* Individual scroll items */
-.scroll-item {
-    flex: 0 0 auto; /* Prevent items from shrinking or growing */
-    width: 150px; /* Set a fixed width for each item */
-    text-align: center; /* Center-align text inside each item */
-    background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background */
-    border-radius: 10px; /* Add rounded corners */
-    padding: 10px; /* Add padding inside each item */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-}
-
-/* Images inside scroll items */
-.scroll-item img {
-    width: 100%; /* Make the image fit the container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 5px; /* Add rounded corners to images */
-}
-
-/* Primary Button */
+/* Buttons */
 .btn-primary {
-    background-color: #FFB300; /* Custom green */
-    border-color: #FFC107;
-    color: #0c457a;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color: #FFB300; /* Slightly darker green */
-    border-color: #FFC107;
-}
-
-/* Secondary Button */
-.btn-secondary {
-    background-color: #0c457a; /* Custom red */
-    border-color: #0c457a;
-    color: white;
-}
-
-.btn-secondary:hover,
-.btn-secondary:focus {
-    background-color: #0c457a; /* Slightly darker red */
-    border-color: #0c457a;
-}
-
-/* Success Button */
-.btn-success {
-    background-color: hsl(207, 92%, 19%); /* Custom blue */
-    border-color: #1e405c;
-    color: white;
-}
-
-.btn-success:hover,
-.btn-success:focus {
-    background-color: #1976D2; /* Slightly darker blue */
-    border-color: #1976D2;
-}
-
-/* Danger Button */
-.btn-danger {
-    background-color: #ff9800; /* Custom orange */
-    border-color: #ff9800;
-    color: white;
-}
-
-.btn-danger:hover,
-.btn-danger:focus {
-    background-color: #e68900; /* Slightly darker orange */
-    border-color: #e68900;
-}
-
-/* Warning Button */
-.btn-warning {
-    background-color: #FFC107; /* Custom yellow */
-    border-color: #FFC107;
-    color: black;
-}
-
-.btn-warning:hover,
-.btn-warning:focus {
-    background-color: #FFB300; /* Slightly darker yellow */
-    border-color: #FFB300;
-}
-
-/* Info Button */
-/* Primary Button */
-.btn-primary {
-    background-color: #FFB300; /* Custom green */
+    background-color: #FFB300;
     border-color: #FFC107;
     color: #1d242b;
 }
 
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #FFB300; /* Slightly darker green */
+    background-color: #FFB300;
     border-color: #FFC107;
-    color: #1d242b;
 }
 
-/* Secondary Button */
 .btn-secondary {
-    background-color:#1976D2; /* Custom red */
+    background-color: #1976D2;
     border-color: #3d80eb;
     color: white;
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus {
-    background-color: #3d80eb; /* Slightly darker red */
+    background-color: #3d80eb;
     border-color: #3d80eb;
 }
 
-/* Success Button */
 .btn-success {
-    background-color: #115695; /* Custom blue */
+    background-color: #115695;
     border-color: #115695;
     color: white;
 }
 
 .btn-success:hover,
 .btn-success:focus {
-    background-color: #115695; /* Slightly darker blue */
+    background-color: #115695;
     border-color: #115695;
 }
 
-/* Danger Button */
 .btn-danger {
-    background-color: #ff9800; /* Custom orange */
+    background-color: #ff9800;
     border-color: #ff9800;
     color: white;
 }
 
 .btn-danger:hover,
 .btn-danger:focus {
-    background-color: #e68900; /* Slightly darker orange */
+    background-color: #e68900;
     border-color: #e68900;
 }
 
-/* Warning Button */
 .btn-warning {
-    background-color: #FFC107; /* Custom yellow */
+    background-color: #FFC107;
     border-color: #FFC107;
     color: #1d242b;
 }
 
 .btn-warning:hover,
 .btn-warning:focus {
-    background-color: #FFB300; /* Slightly darker yellow */
+    background-color: #FFB300;
     border-color: #FFB300;
 }
 
-/* Info Button */
 .btn-info {
-    background-color:#0c457a ;
+    background-color: #0c457a;
     border-color: #0c457a;
-    color: white !important;
+    color: white;
 }
 
 .btn-info:hover,
 .btn-info:focus {
-    background-color: #3d80eb; /* Slightly darker cyan */
+    background-color: #3d80eb;
     border-color: #3d80eb;
 }
 
-/* Light Button */
 .btn-light {
-    background-color: #f8f9fa; /* Custom light gray */
+    background-color: #f8f9fa;
     border-color: #f8f9fa;
     color: black;
 }
 
 .btn-light:hover,
 .btn-light:focus {
-    background-color: #e2e6ea; /* Slightly darker gray */
+    background-color: #e2e6ea;
     border-color: #e2e6ea;
 }
 
-/* Dark Button */
 .btn-dark {
-    background-color: #567ea9; /* Custom dark gray */
+    background-color: #567ea9;
     border-color: #3384d5;
     color: white;
 }
 
 .btn-dark:hover,
 .btn-dark:focus {
-    background-color: #23272b; /* Slightly darker gray */
+    background-color: #23272b;
     border-color: #23272b;
 }
 
-/* Custom Footer Styles */
-/* Target only the bg-dark class inside the footer */
+/* Footer */
 footer.bg-dark {
-    background-color: #1e405c !important; /* Custom dark background for footer only */
+    background-color: #1e405c;
 }
