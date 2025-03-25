@@ -1,4 +1,6 @@
 # silvol
+https://github.com/shantaisat/silvol
+
 
 
 ## Overview
@@ -6,7 +8,7 @@ Silvol is a platform built with Django that connects tech-savvy volunteers with 
 
 ## UX Design Process
 - **Link to User Stories in GitHub Projects:**
-  - [GitHub Projects Kanban Board](https://github.com/username/project/kanban)
+  - [GitHub Projects Kanban Board](https://github.com/users/shantaisat/projects/8)
 - **Wireframes:**
   - [Wireframe Designs](https://linktowireframes.com)
   - Wireframes were designed to ensure clarity, intuitive navigation, and compatibility with assistive technologies. High-contrast colours and alt text for images were used to maximise accessibility.

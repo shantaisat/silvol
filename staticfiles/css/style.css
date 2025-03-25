@@ -5,7 +5,7 @@ body {
 .container {
     max-width: 1080px; /* Set the maximum width for the container */
     margin: 0 auto; /* Center the container horizontally */
-    padding: none; /* Add padding inside the container */
+    padding: 0; /* Add padding inside the container */
     background: none; /* Set the background color to white */
     border-radius: 0px; /* Add rounded corners */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */ 
@@ -31,11 +31,11 @@ nav ul li a {
 }
 
 .bg-light {
-    background-color: none !important; /* Adjust the opacity as needed */
+    background-color: 0 !important; /* Adjust the opacity as needed */
 }
 
 .custom-bg {
-    background-color: none !important; /* Adjust the opacity as needed */
+    background-color: 0 !important; /* Adjust the opacity as needed */
     padding: 20px;
     border-radius: 10px;
 }
@@ -140,7 +140,7 @@ nav ul li a {
 }
 
 /* Info Button */
-./* Primary Button */
+/* Primary Button */
 .btn-primary {
     background-color: #FFB300; /* Custom green */
     border-color: #FFC107;
@@ -197,7 +197,7 @@ nav ul li a {
 .btn-warning {
     background-color: #FFC107; /* Custom yellow */
     border-color: #FFC107;
-    color: 1d242b;
+    color: #1d242b;
 }
 
 .btn-warning:hover,
