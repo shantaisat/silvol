@@ -2,9 +2,21 @@
 {% load static %}
 
 {% block content %}
+<!-- Hero Section -->
+<div class="text-white py-5 position-relative" style="background: url('{% static "images/cover-images/volunteer_profile.png" %}') no-repeat top center/cover;">
+    <!-- Overlay -->
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.5;"></div>
+
+    <!-- Content -->
+    <div class="container text-center position-relative">
+        <h1 class="display-4">{{ volunteer.user.username }}'s Profile</h1>
+        <p class="lead">Learn more about this volunteer and how they can assist you.</p>
+    </div>
+</div>
+
 <div class="container mt-4">
     <!-- Volunteer Profile Header -->
-    <h2 class="text-center mb-4">{{ volunteer.user.username }}'s Profile</h2>
+    <h2 class="text-center mb-4">My Profile</h2>
 
     <div class="row">
         <!-- Profile Card -->
