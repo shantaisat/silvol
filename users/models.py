@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from cloudinary.models import CloudinaryField
 
-
-
-
 class UserProfile(models.Model):
     USER_TYPE_CHOICES = [
         ('volunteer', 'Volunteer'),
@@ -35,7 +32,8 @@ class UserProfile(models.Model):
         elif self.user_type == 'referral':
             if hasattr(self.user, 'referral_profile'):
                 raise ValidationError('A referral profile already exists for this user.')
-            
+
+
 class ReferralProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="referral_profile")
     first_name = models.CharField(max_length=50)

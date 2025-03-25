@@ -1,7 +1,11 @@
 # silvol
+
+![Welcome to Silvol](staticfiles/images/readmeimg/intro.png)
+## GitHub 
 https://github.com/shantaisat/silvol
 
-
+## Heroku Deployment
+https://silvol-3630ff49165c.herokuapp.com/
 
 ## Overview
 Silvol is a platform built with Django that connects tech-savvy volunteers with elderly individuals to help them overcome tech-related challenges. The application provides full CRUD functionality, allowing volunteers to create, read, update, and delete tech support appointments. Silvol empowers volunteers to gain experience and give back to the community by assisting elderly users with popular technologies like Zoom, WhatsApp, Alexa, Google services, Skype, and more. The platform bridges the digital divide, enabling elderly users to learn how to use technology to stay connected and combat loneliness, while fostering a sense of community and support.
@@ -9,10 +13,15 @@ Silvol is a platform built with Django that connects tech-savvy volunteers with 
 ## UX Design Process
 - **Link to User Stories in GitHub Projects:**
   - [GitHub Projects Kanban Board](https://github.com/users/shantaisat/projects/8)
+  ![Volunteers Journeyt](staticfiles/images/readmeimg/volunteerjourney.png)
+![Referral Journey t](staticfiles/images/readmeimg/referraljourney.png)
+
 - **Wireframes:**
-  - [Wireframe Designs](https://linktowireframes.com)
+  ![wireframe of user journeyt](staticfiles/images/readmeimg/wireframeref.png)
+![wireframe of Volunteer journeyt](staticfiles/images/readmeimg/wireframevol.png)
   - Wireframes were designed to ensure clarity, intuitive navigation, and compatibility with assistive technologies. High-contrast colours and alt text for images were used to maximise accessibility.
 - **Design Rationale:**
+![Brandboardt](staticfiles/images/readmeimg/brandboard.png)
 - The layout of Silvol prioritises simplicity and user-friendliness, ensuring an intuitive   experience for both volunteers and elderly users. The responsive design, built with Django and styled using Bootstrap 5, adapts seamlessly across various devices, making the platform accessible from desktops, tablets, and smartphones.
 
 - The colour scheme is carefully selected to meet WCAG guidelines for contrast, providing high visibility and clarity for all users, including those with visual impairments. The typography is designed with legibility in mind, using accessible fonts to enhance readability.
@@ -105,21 +114,25 @@ Using AI tools transformed my workflow and elevated the quality of the project. 
 While these tools were invaluable, they also reminded me of the importance of human oversight. Some suggestions required refinement to fit the project’s specific needs, reinforcing the idea that AI is a powerful assistant, not a replacement for human creativity and problem-solving.
 
 ## Documentation and Testing:
-Reflection: ChatGPT assisted in writing clear and concise documentation, including README sections and testing summaries. It also helped me generate test cases for Django’s testing framework, ensuring comprehensive coverage of CRUD operations and user authentication.
+Reflection: ChatGPT and Co Pilot  assisted in writing clear and concise documentation, including README sections and testing summaries. It also helped me generate test cases for Django’s testing framework, ensuring comprehensive coverage of CRUD operations and user authentication.
 
-## ------------------------------------------------------------------------------------------
+## 
 
 
 ## Testing Summary
 - **Manual Testing:**
-  - **Devices and Browsers Tested:** Windows 11 (Chrome, Edge), macOS (Safari), Android, iOS.
+  - **Devices and Browsers Tested:**  macOS (Safari, Chrome, Firefox), iOS.
   - **Assistive Technologies:** Tested using Lighthouse in the Developer Tools.
   - **Features Tested:** CRUD operations, user authentication, responsive design, and accessibility features.
-  - **Results:** All critical features, including accessibility checks, worked as expected.
+  - **Results:** All critical features, including accessibility checks done . but needs more time. with longer time i can work on impoveing these. 
 - **Automated Testing:(If undertaken)**
   - Tools Used: Django TestCase, GitHub Copilot.
   - Features Covered: CRUD operations, user authentication, and accessibility compliance.
   - Adjustments Made: Additional manual modifications to ensure comprehensive test coverage and inclusivity.
+
+  ![Testst](staticfiles/images/readmeimg/testing.png)
+
+
 
 ## Future Enhancements
 - *Referral Users:
